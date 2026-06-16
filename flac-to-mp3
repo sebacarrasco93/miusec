@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+#v1
+#current_dir="${PWD##*/}" && target_dir="$(cd .. && pwd)/mp3_${current_dir}" && mkdir -p "$target_dir" && for file in *.flac; do printf "Converting: %s ... " "$file"; ffmpeg -loglevel error -stats -i "$file" -map 0:a:0 -map "0:v?" -c:a libmp3lame -q:a 0 -id3v2_version 3 "${target_dir}/${file%.*}.mp3"; printf " [DONE]\n"; done && printf "\n🎉 All files converted successfully!\n📂 Output Folder Path: %s\n" "${target_dir}"
+
+#v2
+current_dir="${PWD##*/}" && target_dir="$(cd .. && pwd)/mp3_${current_dir}" && mkdir -p "$target_dir" && for file in *.flac; do printf "Converting: %s ... " "$file"; ffmpeg -loglevel error -stats -i "$file" -map 0:a:0 -map "0:v?" -c:a libmp3lame -b:a 320k -id3v2_version 3 "${target_dir}/${file%.*}.mp3"; printf " [DONE]\n"; done && printf "\n🎉 All files converted successfully!\n📂 Output Folder Path: %s\n" "${target_dir}"
